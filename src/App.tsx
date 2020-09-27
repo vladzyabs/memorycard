@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import classes from './app.module.scss'
+import {Route} from 'react-router-dom'
+import * as routes from './routes'
+import {Header} from './components'
+import {LoginPage, NewPasswordPage, RegistrationPage, RestorePasswordPage} from './pages'
+import {useSelector} from 'react-redux'
+import {AppRootStateType} from './store/store'
+import {RequestStatusType} from './store/appReducer/appType'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+
+   const loading = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
+   const error = useSelector<AppRootStateType, null | string>(state => state.app.error)
+
+   if (loading === 'loading') {
+      return <div>loading...</div>
+   }
+
+   return (
+      <div className={classes.App}>
+         <Header/>
+         <div className={classes.container}>
+            <Route path={routes.LOGIN} render={() => <LoginPage/>}/>
+            <Route path={routes.REGISTRATION} render={() => <RegistrationPage/>}/>
+            <Route path={routes.NEW_PASSWORD} render={() => <NewPasswordPage/>}/>
+            <Route path={routes.RESTORE_PASSWORD} render={() => <RestorePasswordPage/>}/>
+         </div>
+         {error && <div>error</div>}
+      </div>
+   )
 }
 
-export default App;
+export default App
