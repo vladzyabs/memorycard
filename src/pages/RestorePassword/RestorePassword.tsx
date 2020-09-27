@@ -8,9 +8,7 @@ const RestorePassword = () => {
    const dispatch = useDispatch()
    const [email, setEmail] = React.useState<string>('')
 
-   const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
-      setEmail(e.target.value)
-   }
+   const handleEmail = (e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)
 
    const onClickSend = () => {
       dispatch(getEmailConfirmation(email))

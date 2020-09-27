@@ -46,3 +46,23 @@ export const getEmailConfirmation = (email: string) =>
             dispatch(appSetStatus('succeeded'))
          })
    }
+
+export const sendNewPassword = (password: string, token: string) =>
+   (dispatch: Dispatch) => {
+      dispatch(appSetStatus('loading'))
+      authAPI.sendNewPassword({
+         password,
+         resetPasswordToken: token,
+      })
+         .then(res => {
+            dispatch(setConfirming(true))
+         })
+         .catch(error => {
+            dispatch(appSetError(error.message))
+         })
+         .finally(() => {
+            dispatch(appSetStatus('succeeded'))
+         })
+
+
+   }
