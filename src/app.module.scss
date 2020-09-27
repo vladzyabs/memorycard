@@ -1,0 +1,10 @@
+@import './styles/variables';
+@import './styles/mixins';
+
+.App {
+  margin-top: 50px;
+
+  .container {
+    @extend %container;
+  }
+}
