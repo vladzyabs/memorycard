@@ -1,7 +1,7 @@
 import React, {ChangeEvent} from 'react'
-import {Button, Input} from '../components'
+import {Button, Input} from '../../components'
 import {useDispatch} from 'react-redux'
-import {login} from '../store/loginReducer/loginAction'
+import {login} from '../../store/loginReducer/loginAction'
 
 const Login = () => {
 

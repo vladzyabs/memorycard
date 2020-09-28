@@ -1,9 +1,8 @@
 import axios from 'axios'
 import {
-   forgotParamsType,
-   forgotResponseType,
+   forgotParamsType, forgotResponseType,
    loginParamsType, loginResponseType,
-   registrationParamsType,
+   registrationParamsType, registrationResponseType,
    sendNewPasswordParamsType, sendNewPasswordResponseType,
 } from './apiType'
 
@@ -17,7 +16,7 @@ export const authAPI = {
    login: (data: loginParamsType) =>
       instance.post<loginResponseType>(`auth/login`, data),
    registration: (data: registrationParamsType) =>
-      instance.post(`auth/register`, data),
+      instance.post<registrationResponseType>(`auth/register`, data),
    forgot: (data: forgotParamsType) =>
       instance.post<forgotResponseType>(`auth/forgot`, data),
    sendNewPassword: (data: sendNewPasswordParamsType) =>

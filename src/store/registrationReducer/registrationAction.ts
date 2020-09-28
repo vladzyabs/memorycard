@@ -1,12 +1,37 @@
-const initialState = {}
+import {SET_REGISTRATION} from './registrationTypeAction'
+import {Dispatch} from 'redux'
+import {appSetError, appSetStatus} from '../appReducer/appAction'
+import {authAPI} from '../../api/api'
 
-type InitialStateType = typeof initialState
+// actions =============================================================================================================
 
-const registrationReducer = (state = initialState, action: any): InitialStateType => {
-   switch (action.type) {
-      default:
-         return state
+export const setRegistration = (value: boolean) => ({
+   type: SET_REGISTRATION,
+   value,
+} as const)
+
+export type ActionType = ReturnType<typeof setRegistration>
+
+// thunks ==============================================================================================================
+
+export const registration = (email: string, password: string) =>
+   (dispatch: Dispatch) => {
+      dispatch(appSetStatus('loading'))
+      authAPI.registration({
+         email,
+         password,
+      })
+         .then(res => {
+            if (res.data.addedUser.created) {
+               dispatch(setRegistration(true))
+            } else {
+               dispatch(appSetError('error'))
+            }
+         })
+         .catch(error => {
+            dispatch(appSetError('error'))
+         })
+         .finally(() => {
+            appSetStatus('succeeded')
+         })
    }
-}
-
-export default registrationReducer

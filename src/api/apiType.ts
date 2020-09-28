@@ -22,7 +22,20 @@ export type sendNewPasswordParamsType = {
 }
 
 // response types
-export type registrationResponseType = {}
+export type registrationResponseType = {
+   addedUser: {
+      created: string
+      email: string
+      isAdmin: boolean
+      name: string
+      publicCardPacksCount: number
+      rememberMe: string
+      updated: string
+      verified: boolean
+      __v: number
+      _id: string
+   }
+}
 
 export type loginResponseType = {
    _id: string
