@@ -13,12 +13,9 @@ const App = () => {
    const loading = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
    const error = useSelector<AppRootStateType, null | string>(state => state.app.error)
 
-   if (loading === 'loading') {
-      return <div>loading...</div>
-   }
-
    return (
       <div className={classes.App}>
+         { loading === 'loading' && <div>loading...</div> }
          <Header/>
          <div className={classes.container}>
             <Route path={routes.LOGIN} render={() => <LoginPage/>}/>

@@ -33,11 +33,13 @@ export const getEmailConfirmation = (email: string) =>
       dispatch(appSetStatus('loading'))
       authAPI.forgot({
          email,
-         from: '<vladzyaba@mail.ru>',
+         from: 'test-front-admin <vladzyaba@mail.ru>',
          message: message,
       })
          .then(res => {
-
+            if (res.data.success) {
+               dispatch(setSelectedEmail(email))
+            }
          })
          .catch(error => {
             dispatch(appSetError(error.message))
@@ -55,12 +57,13 @@ export const sendNewPassword = (password: string, token: string) =>
          resetPasswordToken: token,
       })
          .then(res => {
-            dispatch(setConfirming(true))
+            // dispatch(setConfirming(true))
          })
          .catch(error => {
             dispatch(appSetError(error.message))
          })
          .finally(() => {
+            dispatch(setConfirming(true))
             dispatch(appSetStatus('succeeded'))
          })
 
