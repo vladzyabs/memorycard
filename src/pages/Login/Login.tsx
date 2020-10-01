@@ -23,8 +23,8 @@ const Login = () => {
       <div>
          <h1>Login</h1>
          <form>
-            <Input inputTitle={'Email: '} value={email} onChange={handleEmail}/>
-            <Input inputTitle={'Password: '} value={password} onChange={handlePassword}/>
+            <Input type={'text'} inputTitle={'Email: '} value={email} onChange={handleEmail}/>
+            <Input type="password" inputTitle={'Password: '} value={password} onChange={handlePassword}/>
             <input type="checkbox" checked={rememberMe} onChange={handleRememberMe}/>
             <br/>
             <Button onClick={onClickSend}>Send</Button>

@@ -26,8 +26,14 @@ const NewPassword = () => {
    return (
       <div>
          <h1>New password</h1>
-         <Input inputTitle={'Primary password'} value={primaryPassword} onChange={handlePrimaryPassword}/>
-         <Input inputTitle={'Secondary password'} value={secondaryPassword} onChange={handleSecondaryPassword}/>
+         <Input type={'password'}
+                inputTitle={'Primary password'}
+                value={primaryPassword}
+                onChange={handlePrimaryPassword}/>
+         <Input type={'password'}
+                inputTitle={'Secondary password'}
+                value={secondaryPassword}
+                onChange={handleSecondaryPassword}/>
          <Button onClick={onClickSend}>Send</Button>
       </div>
    )

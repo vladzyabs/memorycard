@@ -15,9 +15,9 @@ const Registration = () => {
       <div>
          <h1>Registration</h1>
          <form>
-            <Input inputTitle={"Email: "}/>
-            <Input inputTitle={"Password: "}/>
-            <Input inputTitle={"Repeat password: "}/>
+            <Input type={'text'} inputTitle={"Email: "}/>
+            <Input type={'password'} inputTitle={"Password: "}/>
+            <Input type={'password'} inputTitle={"Repeat password: "}/>
             <Button onClick={onClickSend}>Send</Button>
          </form>
       </div>

@@ -24,7 +24,7 @@ const RestorePassword = () => {
             selectedEmail && <p><a href={`mailto:${selectedEmail}`}>Email</a></p>
          }
 
-         <Input inputTitle={'Email'} value={email} onChange={handleEmail}/>
+         <Input type={'text'} inputTitle={'Email'} value={email} onChange={handleEmail}/>
          <Button onClick={onClickSend}>Send</Button>
       </div>
    )
