@@ -31,7 +31,7 @@ const Input = (props: InputPropsType) => {
             </div>
          }
          {
-            type === 'text' &&
+            type === 'text' && showPassword &&
             <div className={classes.showPassword} onClick={handleShowPassword}>
                 <FontAwesomeIcon icon={faEyeSlash}/>
             </div>
