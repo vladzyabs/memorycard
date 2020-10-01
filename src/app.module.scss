@@ -6,5 +6,6 @@
 
   .container {
     @extend %container;
+    min-height: calc(100vh - 50px);
   }
 }

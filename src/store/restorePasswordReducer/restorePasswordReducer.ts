@@ -10,7 +10,10 @@ type InitialStateType = typeof initialState
 const restorePasswordReducer = (state = initialState, action: ActionType): InitialStateType => {
    switch (action.type) {
       case 'SET_SELECTED_EMAIL':
-         return {...state}
+         return {...state, selectedEmail: action.email}
+      case 'SET_CONFIRMING':
+         debugger
+         return {...state, success: action.payload}
       default:
          return state
    }

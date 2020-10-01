@@ -12,6 +12,11 @@ body {
 html {
     line-height: 1.15; /* 1 */
     -webkit-text-size-adjust: 100%; /* 2 */
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
 }
 
 main {
@@ -36,6 +41,7 @@ pre {
 
 a {
     background-color: transparent;
+    text-decoration: none;
 }
 
 abbr[title] {

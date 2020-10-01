@@ -1,0 +1,1 @@
+export const SET_REGISTRATION = 'SET_REGISTRATION'

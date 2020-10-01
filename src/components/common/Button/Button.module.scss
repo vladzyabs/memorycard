@@ -1,3 +1,26 @@
-.button {
+@import "../../../styles/variables";
 
+.button {
+  outline: none;
+  cursor: pointer;
+  padding: 5px 10px;
+  min-height: 40px;
+  min-width: 130px;
+  text-transform: uppercase;
+
+  color: #fff;
+  background-color: $color-accent;
+  border: 1px solid $color-accent;
+
+  transition: .3s;
+
+  &:hover, &:focus {
+    background: #fff;
+    color: $color-accent;
+  }
+
+  &:disabled {
+    opacity: .7;
+    background-color: $color-accent;
+  }
 }
