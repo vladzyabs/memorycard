@@ -1,9 +1,9 @@
 import React from 'react'
 import classes from './app.module.scss'
-import {Route} from 'react-router-dom'
+import {Route, Switch} from 'react-router-dom'
 import * as routes from './routes'
 import {Header, Loader} from './components'
-import {LoginPage, NewPasswordPage, RegistrationPage, RestorePasswordPage} from './pages'
+import {LoginPage, ProfilePage, NewPasswordPage, RegistrationPage, RestorePasswordPage, NotFound} from './pages'
 import {useSelector} from 'react-redux'
 import {AppRootStateType} from './store/store'
 import {RequestStatusType} from './store/appReducer/appType'
@@ -18,12 +18,16 @@ const App = () => {
          {loading === 'loading' && <Loader/>}
          <Header/>
          <div className={classes.container}>
-            <switch>
+            <Switch>
+               <Route exact path={routes.HOME} render={() => <LoginPage/>}/>
+               <Route path={routes.PROFILE} render={() => <ProfilePage/>}/>
                <Route path={routes.LOGIN} render={() => <LoginPage/>}/>
                <Route path={routes.REGISTRATION} render={() => <RegistrationPage/>}/>
                <Route path={routes.NEW_PASSWORD} render={() => <NewPasswordPage/>}/>
                <Route path={routes.RESTORE_PASSWORD} render={() => <RestorePasswordPage/>}/>
-            </switch>
+
+               <Route component={NotFound}/>
+            </Switch>
          </div>
          {error && <div>error</div>}
       </div>
