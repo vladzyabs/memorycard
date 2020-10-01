@@ -14,14 +14,10 @@ export type ActionType = ReturnType<typeof setIsLoggedIn>
 
 // thunks ==============================================================================================================
 
-export const login = (email: string, password: string, rememberMe: boolean) =>
+export const login = (data: {email: string, password: string, rememberMe: boolean}) =>
    (dispatch: Dispatch) => {
       dispatch(appSetStatus('loading'))
-      authAPI.login({
-         email,
-         password,
-         rememberMe,
-      })
+      authAPI.login(data)
          .then(res => {
             console.log(res)
             if (res.status === 200) {

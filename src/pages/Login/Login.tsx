@@ -1,33 +1,71 @@
-import React, {ChangeEvent} from 'react'
+import React from 'react'
+import classes from './Login.module.scss'
 import {Button, Input} from '../../components'
 import {useDispatch} from 'react-redux'
 import {login} from '../../store/loginReducer/loginAction'
+import * as Yup from 'yup'
+import {useFormik} from 'formik'
+
+const validationSchema = Yup.object({
+   email: Yup.string()
+      .required('Empty field')
+      .email('Invalid email address'),
+   password: Yup.string()
+      .required('Empty field')
+      .min(8, 'Must be 8 characters or less'),
+})
 
 const Login = () => {
 
    const dispatch = useDispatch()
-
-   const [email, setEmail] = React.useState<string>('')
-   const [password, setPassword] = React.useState<string>('')
-   const [rememberMe, setRememberMe] = React.useState<boolean>(false)
-
-   const handleEmail = (e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)
-   const handlePassword = (e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)
-   const handleRememberMe = (e: ChangeEvent<HTMLInputElement>) => setRememberMe(e.target.checked)
-
-   const onClickSend = () => {
-      dispatch(login(email, password, rememberMe))
-   }
+   const formik = useFormik({
+      initialValues: {
+         email: '',
+         password: '',
+         rememberMe: false,
+      },
+      validationSchema,
+      onSubmit: values => {
+         console.log(values)
+         // dispatch(login(values))
+      },
+   })
 
    return (
-      <div>
+      <div className={classes.page}>
          <h1>Login</h1>
-         <form>
-            <Input type={'text'} inputTitle={'Email: '} value={email} onChange={handleEmail}/>
-            <Input type="password" inputTitle={'Password: '} value={password} onChange={handlePassword}/>
-            <input type="checkbox" checked={rememberMe} onChange={handleRememberMe}/>
-            <br/>
-            <Button onClick={onClickSend}>Send</Button>
+         <form onSubmit={formik.handleSubmit}>
+
+            <div className={classes.formItem}>
+               <Input type={'text'}
+                      inputTitle={'Email: '}
+                      error={formik.touched.email ? formik.errors.email : ''}
+                      {...formik.getFieldProps('email')}
+               />
+            </div>
+
+            <div className={classes.formItem}>
+               <Input type="password"
+                      inputTitle={'Password: '}
+                      error={formik.touched.password ? formik.errors.password : ''}
+                      {...formik.getFieldProps('password')}
+               />
+            </div>
+
+            <div className={classes.formItem}>
+               <input type="checkbox"
+                      {...formik.getFieldProps('rememberMe')}
+               />
+            </div>
+
+            <div className={classes.formItem}>
+               <Button type={'submit'}
+                       disabled={
+                          !!formik.errors.password ||
+                          !!formik.errors.email}
+               >Send</Button>
+            </div>
+
          </form>
       </div>
    )
