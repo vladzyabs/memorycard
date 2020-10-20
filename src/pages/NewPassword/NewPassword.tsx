@@ -3,9 +3,9 @@ import classes from './NewPassword.module.scss'
 import {Button, Input} from '../../components'
 import {useDispatch, useSelector} from 'react-redux'
 import {useParams, Redirect} from 'react-router-dom'
-import {LOGIN} from '../../routes'
+import {PATHS} from '../../routes'
 import {sendNewPassword} from '../../store/restorePasswordReducer/restorePasswordAction'
-import {AppRootStateType} from '../../store/store'
+import {AppRootStateType} from '../../store/rootReducer'
 import * as Yup from 'yup'
 import {useFormik} from 'formik'
 
@@ -35,7 +35,7 @@ const NewPassword = () => {
    })
 
    if (success) {
-      return <Redirect to={LOGIN}/>
+      return <Redirect to={PATHS.LOGIN}/>
    }
 
    return (

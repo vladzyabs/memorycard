@@ -1,4 +1,4 @@
-import {ActionType} from './loginAction'
+import {ActionType} from './authAction'
 
 const initialState = {
    isLoggedIn: false as boolean,
@@ -6,7 +6,7 @@ const initialState = {
 
 type InitialStateType = typeof initialState
 
-const loginReducer = (state = initialState, action: ActionType): InitialStateType => {
+const authReducer = (state = initialState, action: ActionType): InitialStateType => {
    switch (action.type) {
       case 'SET_LOGIN':
          return {...state, isLoggedIn: action.value}
@@ -15,4 +15,4 @@ const loginReducer = (state = initialState, action: ActionType): InitialStateTyp
    }
 }
 
-export default loginReducer
+export default authReducer

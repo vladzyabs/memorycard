@@ -1,7 +1,7 @@
 import React from 'react'
 import classes from './Navbar.module.scss'
 import {NavLink} from 'react-router-dom'
-import * as LINKS from '../../routes'
+import {PATHS} from '../../routes'
 
 const Navbar = () => {
 
@@ -33,11 +33,11 @@ const Navbar = () => {
             <div className={classes.switchLine}>{''}</div>
          </div>
          <nav className={classes.navbar}>
-            <NavLink to={LINKS.LOGIN} activeClassName={classes.activeLink} onClick={onClickLink}>login</NavLink>
-            <NavLink to={LINKS.PROFILE} activeClassName={classes.activeLink} onClick={onClickLink}>profile</NavLink>
-            <NavLink to={LINKS.REGISTRATION} activeClassName={classes.activeLink}
+            <NavLink to={PATHS.LOGIN} activeClassName={classes.activeLink} onClick={onClickLink}>login</NavLink>
+            <NavLink to={PATHS.PROFILE} activeClassName={classes.activeLink} onClick={onClickLink}>profile</NavLink>
+            <NavLink to={PATHS.REGISTRATION} activeClassName={classes.activeLink}
                      onClick={onClickLink}>registration</NavLink>
-            <NavLink to={LINKS.RESTORE_PASSWORD} activeClassName={classes.activeLink} onClick={onClickLink}>restore
+            <NavLink to={PATHS.RESTORE_PASSWORD} activeClassName={classes.activeLink} onClick={onClickLink}>restore
                password</NavLink>
          </nav>
       </div>
