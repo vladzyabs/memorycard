@@ -22,7 +22,7 @@ export type ActionType
 // thunks ==============================================================================================================
 
 export const getEmailConfirmation = (email: string) =>
-   (dispatch: Dispatch) => {
+   async (dispatch: Dispatch) => {
       const message = `
          <div style="padding: 15px">
             password recovery link:
@@ -31,41 +31,37 @@ export const getEmailConfirmation = (email: string) =>
          </div>
       `
       dispatch(appSetStatus('loading'))
-      authAPI.forgot({
-         email,
-         from: 'test-front-admin <vladzyaba@mail.ru>',
-         message: message,
-      })
-         .then(res => {
-            if (res.data.success) {
-               dispatch(setSelectedEmail(email))
-            }
+      try {
+         const res = await authAPI.forgot({
+            email,
+            from: 'test-front-admin <vladzyaba@mail.ru>',
+            message: message,
          })
-         .catch(error => {
-            dispatch(appSetError(error.message))
-         })
-         .finally(() => {
+         if (res.data.success) {
+            dispatch(setSelectedEmail(email))
             dispatch(appSetStatus('succeeded'))
-         })
+         } else {
+            dispatch(appSetError('Oops...Something went wrong. Please try again later'))
+            dispatch(appSetStatus('failed'))
+         }
+      } catch (error) {
+         dispatch(appSetError('Oops...Something went wrong. Please try again later'))
+         dispatch(appSetStatus('failed'))
+      }
    }
 
 export const sendNewPassword = (password: string, token: string) =>
-   (dispatch: Dispatch) => {
+   async (dispatch: Dispatch) => {
       dispatch(appSetStatus('loading'))
-      authAPI.sendNewPassword({
-         password,
-         resetPasswordToken: token,
-      })
-         .then(res => {
-            // dispatch(setConfirming(true))
+      try {
+         const res = await authAPI.sendNewPassword({
+            password,
+            resetPasswordToken: token,
          })
-         .catch(error => {
-            dispatch(appSetError(error.message))
-         })
-         .finally(() => {
-            dispatch(setConfirming(true))
-            dispatch(appSetStatus('succeeded'))
-         })
-
-
+         dispatch(setConfirming(true))
+         dispatch(appSetStatus('succeeded'))
+      } catch (error) {
+         dispatch(appSetError('Oops...Something went wrong. Please try again later'))
+         dispatch(appSetStatus('failed'))
+      }
    }

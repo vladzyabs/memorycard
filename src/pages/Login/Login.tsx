@@ -1,10 +1,13 @@
 import React from 'react'
 import classes from './Login.module.scss'
 import {Button, Input} from '../../components'
-import {useDispatch} from 'react-redux'
-import {login} from '../../store/loginReducer/loginAction'
+import {useDispatch, useSelector} from 'react-redux'
+import {Redirect} from 'react-router-dom'
+import {login} from '../../store/authReducer/authAction'
 import * as Yup from 'yup'
 import {useFormik} from 'formik'
+import {AppRootStateType} from '../../store/rootReducer'
+import {PATHS} from '../../routes'
 
 const validationSchema = Yup.object({
    email: Yup.string()
@@ -18,6 +21,7 @@ const validationSchema = Yup.object({
 const Login = () => {
 
    const dispatch = useDispatch()
+   const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
    const formik = useFormik({
       initialValues: {
          email: '',
@@ -29,6 +33,10 @@ const Login = () => {
          dispatch(login(values))
       },
    })
+
+   if (isLoggedIn) {
+      return <Redirect to={PATHS.PROFILE}/>
+   }
 
    return (
       <div className={classes.page}>

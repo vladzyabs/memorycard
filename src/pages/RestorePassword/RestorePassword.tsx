@@ -3,7 +3,7 @@ import classes from './RestorePassword.module.scss'
 import {Button, Input} from '../../components'
 import {useDispatch, useSelector} from 'react-redux'
 import {getEmailConfirmation} from '../../store/restorePasswordReducer/restorePasswordAction'
-import {AppRootStateType} from '../../store/store'
+import {AppRootStateType} from '../../store/rootReducer'
 import * as Yup from 'yup'
 import {useFormik} from 'formik'
 

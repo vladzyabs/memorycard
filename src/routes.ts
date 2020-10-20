@@ -1,6 +1,8 @@
-export const HOME = '/'
-export const PROFILE = '/profile'
-export const LOGIN = '/login'
-export const REGISTRATION = '/registration'
-export const RESTORE_PASSWORD = '/restore-password'
-export const NEW_PASSWORD = '/set-new-password/:token?'
+export const PATHS = {
+   HOME: '/',
+   PROFILE: '/profile',
+   LOGIN: '/login',
+   REGISTRATION: '/registration',
+   RESTORE_PASSWORD: '/restore-password',
+   NEW_PASSWORD: '/set-new-password/:token?',
+}

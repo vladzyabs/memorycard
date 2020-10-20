@@ -15,23 +15,22 @@ export type ActionType = ReturnType<typeof setRegistration>
 // thunks ==============================================================================================================
 
 export const registration = (email: string, password: string) =>
-   (dispatch: Dispatch) => {
+   async (dispatch: Dispatch) => {
       dispatch(appSetStatus('loading'))
-      authAPI.registration({
-         email,
-         password,
-      })
-         .then(res => {
-            if (res.data.addedUser.created) {
-               dispatch(setRegistration(true))
-            } else {
-               dispatch(appSetError('error'))
-            }
+      try {
+         const res = await authAPI.registration({
+            email,
+            password,
          })
-         .catch(error => {
-            dispatch(appSetError('error'))
-         })
-         .finally(() => {
+         if (res.data.addedUser.created) {
+            dispatch(setRegistration(true))
             appSetStatus('succeeded')
-         })
+         } else {
+            dispatch(appSetError('error'))
+            appSetStatus('failed')
+         }
+      } catch (error) {
+         dispatch(appSetError('error app'))
+         appSetStatus('failed')
+      }
    }

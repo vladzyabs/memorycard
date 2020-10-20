@@ -12,7 +12,6 @@ const restorePasswordReducer = (state = initialState, action: ActionType): Initi
       case 'SET_SELECTED_EMAIL':
          return {...state, selectedEmail: action.email}
       case 'SET_CONFIRMING':
-         debugger
          return {...state, success: action.payload}
       default:
          return state
